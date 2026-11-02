@@ -23,6 +23,7 @@ FLA_ROOT = (
     BENCHMARK_DIR.parent
     / "ops"
     / "FLA"
+    / "wall_attn"
     / "flash-linear-attention-for-sail"
 ).resolve()
 
@@ -40,6 +41,7 @@ try:
 except ModuleNotFoundError:
     from recording import benchmark_metric, record_benchmark_result
 
+import flag_attn
 from flag_attn.testing import backend as test_backend
 from flag_attn import parallel_wall_attn
 from flag_attn.FLA.wall_attn import get_last_route, select_route
@@ -101,7 +103,7 @@ def _environment():
         "fla_revision": _source_revision(FLA_ROOT),
         "fla_source": str(FLA_ROOT),
         "candidate_revision": _source_revision(
-            Path(__file__).resolve().parents[4]
+            Path(flag_attn.__file__).resolve().parents[2]
         ),
     }
 
@@ -113,7 +115,9 @@ def _load_fla_provider():
 
     if not provider_path.is_file():
         raise FileNotFoundError(
-            f"Official FLA source not found: {provider_path}"
+            f"Official FLA source not found: {provider_path}. "
+            "Run 'git submodule update --init --recursive' from the "
+            "BaselineBenchmark repository root."
         )
 
     # Detect whether another fla package was imported earlier.
