@@ -1,3 +1,6 @@
 [submodule "backends/_thead/ops/FLA/wall_attn/flash-linear-attention-for-sail"]
 	path = backends/_thead/ops/FLA/wall_attn/flash-linear-attention-for-sail
 	url = https://github.com/t-head/flash-linear-attention-for-sail.git
+[submodule "backends/_thead/ops/FLA/log_linear_attn/flash-linear-attention-for-sail"]
+	path = backends/_thead/ops/FLA/log_linear_attn/flash-linear-attention-for-sail
+	url = https://github.com/t-head/flash-linear-attention-for-sail.git
